@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2>Student Attempts</h2>
+
+<table border="1">
+<tr>
+<th>Roll Number</th>
+<th>Score</th>
+</tr>
+
+{% for r in results %}
+<tr>
+<td>{{r[0]}}</td>
+<td>{{r[1]}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
