@@ -141,7 +141,7 @@ ONLY JSON.
     if not os.path.exists("static/qrcodes"):
         os.makedirs("static/qrcodes")
 
-    quiz_url = f"http://127.0.0.1:8000/quiz/{quiz_id}"
+    quiz_url = f"https://recall-quiz.onrender.com/quiz/{quiz_id}"
     img = qrcode.make(quiz_url)
     img.save(f"static/qrcodes/{quiz_id}.png")
 
@@ -223,4 +223,5 @@ def teacher_results(request: Request, quiz_id: str):
     return templates.TemplateResponse("teacher_results.html", {
         "request": request,
         "results": results
+
     })
