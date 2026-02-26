@@ -1,25 +1,49 @@
-<script>
-let timeLeft = 240; // 4 minutes
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+</head>
+<body>
 
+<h2>Quiz</h2>
+
+<p>Time Left: <span id="timer">4:00</span></p>
+
+<form id="quizForm" method="post" action="/submit/{{ quiz_id }}">
+
+    {% for q in questions %}
+        <div>
+            <p>{{ q[1] }}</p>
+            <input type="radio" name="q{{ q[0] }}" value="A"> {{ q[2] }}<br>
+            <input type="radio" name="q{{ q[0] }}" value="B"> {{ q[3] }}<br>
+            <input type="radio" name="q{{ q[0] }}" value="C"> {{ q[4] }}<br>
+            <input type="radio" name="q{{ q[0] }}" value="D"> {{ q[5] }}<br>
+        </div>
+        <hr>
+    {% endfor %}
+
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+let timeLeft = 240;
 let timer = document.getElementById("timer");
 
 let countdown = setInterval(function() {
-
     let minutes = Math.floor(timeLeft / 60);
     let seconds = timeLeft % 60;
 
-    if (seconds < 10) {
-        seconds = "0" + seconds;
-    }
+    if (seconds < 10) seconds = "0" + seconds;
 
     timer.innerText = minutes + ":" + seconds;
-
     timeLeft--;
 
     if (timeLeft < 0) {
         clearInterval(countdown);
         document.getElementById("quizForm").submit();
     }
-
 }, 1000);
 </script>
+
+</body>
+</html>
