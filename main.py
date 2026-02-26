@@ -154,7 +154,7 @@ ONLY JSON.
 # ================= QUIZ PAGE =================
 
 @app.get("/quiz/{quiz_id}", response_class=HTMLResponse)
-def quiz_page(request: Request, quiz_id: str):
+async def quiz_page(request: Request, quiz_id: str):
 
     conn = get_db()
     cursor = conn.cursor()
@@ -225,3 +225,4 @@ def teacher_results(request: Request, quiz_id: str):
         "results": results
 
     })
+
