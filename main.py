@@ -182,12 +182,17 @@ async def submit_quiz(request: Request, quiz_id: str, roll_number: str = Form(..
 
     cursor.execute("SELECT * FROM questions WHERE quiz_id=?", (quiz_id,))
     questions = cursor.fetchall()
+    for q in questions:
+        print("DEBUG QUESTION ROW:",q)
 
     score = 0
 
     for q in questions:
-        selected = form.get(str(q[0]))
-        if selected == q[6]:
+        selected = form.get("q"+str(q[0]))
+        print("Selected:",selected)
+        print("Correct:",q[6])
+        if selected and selected.strip().upper()==q[6].strip.upper():
+            
             score += 1
 
     cursor.execute("""
@@ -225,4 +230,5 @@ def teacher_results(request: Request, quiz_id: str):
         "results": results
 
     })
+
 
